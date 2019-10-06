@@ -1,0 +1,19 @@
+{
+"manifest":{
+    "1":{},
+    "2":{},
+    "1.1":{},
+    "3":{}
+    
+    
+    
+    },
+
+"program_controls":{
+    "logfile_threshold":"none - NOTSET",
+    "logfile_threshold_comment":"Any value other than those in threshold options will result in no loging to a file" ,
+    "logconsole_threshold": "NOTSET",
+    "threshold options":" CRITICAL, ERROR, WARNING, INFO, DEBUG, NOTSET = 0",
+    "debug_v":"True",
+    "debug_vv":"True"}
+}
