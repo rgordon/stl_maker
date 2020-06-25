@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
 '''
-Created on Oct 2, 2019
-This set of code is a "stub" for building new programs. It contains a bunch of stuff I always use.
-1. Bootstrapper to collect system, directories, etc.
-2. Reader of a user input input JSON file. The file contains a space for user inputs and several program controls.
-   ALl of these will end up in a dictionary called "config". The complete command line will end up in this dictionaly also.
-3. Initializes python logging for console and file output.
+Created on June 12, 2020
+This is my attempt to write a tool to create stl files based on Z as a function of X and Y
+
+
+This  program is built off my program stub.
+	1. Bootstrapper to collect system, directories, etc.
+	2. Reader of a user input input JSON file. The file contains a space for user inputs and several program controls.
+	   ALl of these will end up in a dictionary called "config". The complete command line will end up in this dictionaly also.
+	3. Initializes python logging for console and file output.
 
 @author: ms
 '''
@@ -16,10 +19,12 @@ import os
 import datetime
 import logging
 import math
+from datetime import *
 
 # Import from this package
 import bootstrap
 import helpers
+import stl_builder
 
 
 
@@ -88,6 +93,67 @@ log.info(config.ToString())
 
 #-------------------------------------------------
 
+# Move inputs into variables
+expected_inputs = ("Z_as_a_function_of_X_and_Y",
+					"min_x",
+					"max_x",
+					"num_x_steps",
+					"min_y",
+					"max_y",
+					"num_y_steps",
+					"output_type",
+					"output_filename",
+					"output_directory")
+					
+user_inputs = config["user_input_file"]
+for item in expected_inputs:
+	if item not in user_inputs.keys():
+		log.critical("Missing input in config file: " + item)
+		quit()
+	
+Z_as_a_function_of_X_and_Y = user_inputs["Z_as_a_function_of_X_and_Y"]["Z_as_a_function_of_X_and_Y"]
+min_x	 					= 	user_inputs["min_x"]["min_x"]
+max_x				  	    = 	user_inputs["max_x"]["max_x"]
+num_x_steps				    = 	user_inputs["num_x_steps"]["num_x_steps"]
+min_y					    = 	user_inputs["min_y"]["min_y"]
+max_y					    = 	user_inputs["max_y"]["max_y"]
+num_y_steps				    = 	user_inputs["num_y_steps"]["num_y_steps"]
+output_type					= 	user_inputs["output_type"]["output_type"]
+output_filename				= 	user_inputs["output_filename"]["output_filename"]
+output_directory			= 	user_inputs["output_directory"]["output_directory"]
+
+#########################################################################################################
+#Validate inputs
+if   output_type in ( "text", "txt", "TEXT", "TXT", "Text"):         output_type = "txt"
+elif output_type in ("binary", "bin","BINARY","BIN","Binary","Bin"): output_type = "bin"
+else:
+	log.critical("output_type in json ["+output_type+"] file not recognized")
+	quit()
+
+if os.path.exists(output_directory): 
+	filepath = os.path.abspath(os.path.join(output_directory,output_filename+".stl"))
+else:
+	log.critical("output_directory ["+output_directory+"] not found.")
+	quit()
+
+
+#########################################################################################################
+# Print some starting fluff
+total_facets_expected = 2* num_x_steps*num_y_steps
+print("Starting to caclulate a total of "+ str(total_facets_expected)+" triangular facets.")
+duration_estimate_printed = False
+
+
+
+#########################################################################################################
+#Create and write the file header
+
+#Set up the output file
+stl_builder.Initialize_stl_file(filepath, output_type, total_facets_expected, solid_name = "")
+
+# Create the file
+
+# Append the required stl header info
 
 
 
@@ -95,8 +161,71 @@ log.info(config.ToString())
 
 
 
+#########################################################################################################
+#Iterate over a grid of X and Y values defiend by the imput prarmeters
+x_step = (max_x - min_x)/num_x_steps
+y_step = (max_y - min_y)/num_y_steps
+num_facets = 0
 
 
+# Do one row of Y at a time 
+last_row_values = []
+for j in range(num_y_steps+1):
+	y=min_y + j*y_step
+	
+	# make an array to collect a list of the Z values at each X for this Y
+	this_row_values = []
+	
+	
+	# Now step through the X locations
+	for i in range (num_x_steps+1):
+		x = min_x + i * x_step
+		exec(Z_as_a_function_of_X_and_Y) # JASON file supplied code that delivers a variable named "z"
+		this_row_values.append((x,y,z))
+		
+	if len(last_row_values) == 0: # check to see if this is the first row.
+		last_row_values = this_row_values
+		continue   
+	
+	else: # we have two wors of values, so we can proceed to build the triangular facets of our stl.
+	
+		#Step throught the arrays, building two triangles at each step
+		for i in range (num_x_steps):
+			first_triangle_points  =  (this_row_values[i], this_row_values[i+1], last_row_values[i])
+			second_triangle_points =  (this_row_values[i+1], last_row_values[i+1], last_row_values[i] )
+			#Create stl_facets for these two triangles
+			first_stl_facet = stl_builder.STL_Facet(this_row_values[i], this_row_values[i+1], last_row_values[i])
+			second_stl_facet =  stl_builder.STL_Facet(this_row_values[i+1], last_row_values[i+1], last_row_values[i] )
+			
+			#add these facets to the file
+			first_stl_facet.Append_facet_to_file(filepath, output_type)
+			second_stl_facet.Append_facet_to_file(filepath, output_type)
+			
+			# Increment facet count
+			num_facets += 2
+			
+			if not duration_estimate_printed:
+				if num_facets > 20:
+					duration_so_far = datetime.now() - config["start_time"]
+					time_per_facet = duration_so_far/num_facets
+					remaining_facets = total_facets_expected - num_facets
+					time_remaining = remaining_facets*time_per_facet
+					expected_finish_time = datetime.now() + time_remaining
+					print("Estimated calculation duration = "+str( time_remaining))
+					print("Estimated completion time = "+str(expected_finish_time))
+					duration_estimate_printed = True
+		
+		
+		#We've processed each triangle, so lets move to the next row 
+		last_row_values = this_row_values
+	
+print("stl creation complete. "+str(num_facets)+ " facets created'")
+	
+	
+	
+	
+	
+		
 
 
 

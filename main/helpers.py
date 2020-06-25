@@ -5,6 +5,7 @@ Created on Mar 7, 2019
 '''
 import logging
 import datetime
+import subprocess
 #Turn on logging
 log=logging.getLogger(__name__)
 
@@ -197,3 +198,20 @@ def CheckType(value, var_type):
 
     else: return (1,"unknown type [" + var_type +"]")
         
+def IEX(command, quiet= False, silent=False):
+		'''Execute command in new process and return result.'''
+		pipe = subprocess.Popen(command,shell=True,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		output_buffer = pipe.communicate()
+		console_error = str(output_buffer[1], 'utf-8') # stderr - convert to utf-8 string 
+		console_output = str(output_buffer[0], 'utf-8') # stdout - convert to utf-8 string 
+		if not silent:
+			if not quiet: print("++ CONSOLE OUTPUT ++++++++++++++++++")
+			print(console_output)
+			if not quiet: 
+				print("")
+				print("++ CONSOLE ERROR++++++++++++++++++")
+				print(console_error)
+		if pipe.returncode != 0:
+			return {"status": "fail", "reason":console_error,"return_code":pipe.returncode}
+		else:
+			return {"status": "success", "result": console_output, "return_code":pipe.returncode}
