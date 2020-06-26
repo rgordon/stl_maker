@@ -16,7 +16,6 @@ This  program is built off my program stub.
 
 # import system modules
 import os
-import datetime
 import logging
 import math
 from datetime import *
@@ -38,7 +37,7 @@ config = bootstrap.Create_config()
 
 
 # Call a bootstrap function that processes the command line variables 
-# and and reads in a user config file, putting the contents into the 
+# and reads in a user config file, putting the contents into the 
 # "config" dictionary in two sub-dictionaries: 
 # "program controls" : contains debug, logging, etc info 
 # "user_input_file" : evertything not in "program controls"  
@@ -66,11 +65,14 @@ log.addHandler(console_handler)
 # First, redefine the level for general use to 0
 log.setLevel(0)
 
+
 # Now look in the program controls for user resets to the logging levels
 console_handler.setLevel(program_controls["logconsole_threshold"])
-log.info("Current console logging level is: "+str(program_controls["logconsole_threshold"]))
 
-# Set up logging to a file, if requested
+if config["debug_vv"]:
+	log.info("Current console logging level is: "+str(program_controls["logconsole_threshold"]))
+
+# Set up logging to a file, if requested via the config file
 if program_controls["logfile_threshold"] in ("CRITICAL", "ERROR", "WARNING", "INFO" , "DEBUG" ,"NOTSET"): 
     print("Setting up logging to file...")
 
@@ -80,10 +82,12 @@ if program_controls["logfile_threshold"] in ("CRITICAL", "ERROR", "WARNING", "IN
     file_handler.setLevel(program_controls["logfile_threshold"])
     file_handler.setFormatter(formatter)
     log.addHandler(file_handler)
-    
-log.info("Current file logging level is: "+str(program_controls["logfile_threshold"]))
 
-log.info(config.ToString())
+if config["debug_vv"]:
+	log.info("Current file logging level is: "+str(program_controls["logfile_threshold"]))
+
+if config["debug_v"]:
+	log.info(config.ToString())
 
 
 
