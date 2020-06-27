@@ -4,7 +4,7 @@ This program creates an STL file of a surface based on the inputs provided in a 
 
 Some sample surfaces I've made:
 
-[half-donut picture](Pictures/half-donut.jpg)
+[half-donut picture](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/half-donut.jpg)
 
 
 
