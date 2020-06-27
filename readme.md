@@ -4,7 +4,7 @@ This program creates an STL file of a surface based on the inputs provided in a 
 
 Some sample surfaces I've made:
 
-![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/half-donut.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/egg%20crate.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/radiating%20waves.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/damped%20radiating%20waves.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/2%20damped%20superposition.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/2%20damped%20interference.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/coiled%20snake.jpg)
+![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/half-donut.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/egg%20crate.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/radiating%20waves.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/damped%20radiating%20waves.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/2%20damped%20superposition.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/2%20damped%20interference.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/coiled%20snake.jpg)  ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/coiled%20snake%203D%20printed.JPG)
 
 
 
