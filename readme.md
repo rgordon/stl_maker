@@ -4,33 +4,13 @@ This program creates an STL file of a surface based on the inputs provided in a 
 
 Some sample surfaces I've made:
 
-![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/half-donut.jpg)
-
-![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/egg%20crate.jpg)
-
-![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/radiating%20waves.jpg)
-
-![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/damped%20radiating%20waves.jpg)
-
-![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/2%20damped%20superposition.jpg)
-
-![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/2%20damped%20interference.jpg)
-
-![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/coiled%20snake.jpg)
+![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/half-donut.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/egg%20crate.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/radiating%20waves.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/damped%20radiating%20waves.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/2%20damped%20superposition.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/2%20damped%20interference.jpg) ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/coiled%20snake.jpg)
 
 
 
 
 
-
-
-
-
-
-
-
-
-
+## HOW TO
 
 The program launches from the command line:
 
@@ -82,11 +62,12 @@ Many interesting surfaces can require multiple lines of code to describe. For th
 ## A few other things:
 
 1. If the JSON input file has any JSON syntax errors, the error printed by this program should help you get close to the location of the error.
-2. To run this program, you will need a couple of additional python modules beyond the default stuff. In particular, you will need
+2. To run this program, you will need a couple of additional python packages beyond the default stuff. In particular, you will need
 
-3. bitstring  ("pip install bitstring" from a command window)
-   numpy ("pip install numpy" from a command window)
+          - bitstring  ("pip install bitstring" from a command window)
+          - pip install numpy" from a command window)
+
 4. To look at the surfaces you create, you'll need to use a tool that can read and display surfaces in stl files. Some may not liek binary format, others may not like text format. I've opened all the surfaces created in my sample files using Fusion 360, and most using PrusaSlicer. 
 5. Have FUN!
 6. Lastly - I built this program using a "program stub" that I've evolved for myself and use whenever I write a new program. It's way more complex than   needed for this particular program. If you decide to try to read through my   code, I hope the comments will help you out.  
-7. And one beyond lastly - I wrote and tested this in windows. It should work in other OS's but I have not tested it. If you run under linux, watch the path in the sample input files for the dreaded windows drive letter. 
+7. And one beyond lastly - I wrote and tested this in windows. It should work in other OS's but I have not tested it. Whatever you do,  watch the path in the sample input files. In Linux, don't use a the dreaded windows drive letter. In Windows, use a double forward slash or a backslash in the path names.   
