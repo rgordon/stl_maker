@@ -6,10 +6,6 @@ Some sample surfaces I've made:
 
 ![](https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/half-donut.jpg)
 
-```html
-<img src="https://github.com/mikeabuilder/stl_maker/blob/master/Pictures/half-donut.jpg" alt="drawing" width="200"/>
-```
-
 
 
 The program launches from the command line:

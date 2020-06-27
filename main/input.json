@@ -1,7 +1,7 @@
 {
 "Z_as_a_function_of_X_and_Y":{
     "comment":"Function must be aline of executable python code that has x and y as variables, and returns the desired z value. x,y,and z must be lower case.",
-    "Z_as_a_function_of_X_and_Y":"z=math.sin(x) * math.sin(y)"
+    "Z_as_a_function_of_X_and_Y":"z=math.sin(x) + math.sin(y)"
 	},
 
 "min_x" : {
