@@ -3,7 +3,7 @@
 import math
 import numpy as np
 
-def return_my_z(x,y):
+def return_my_z(x,y, config):
 	'''Return a Z value given the imput X and Y'''
 	
 	# convert X and Y to polar coordinates (r, theta)
@@ -13,7 +13,7 @@ def return_my_z(x,y):
 	# Several interesting equations - uncomment whichever you want to use
 	
 	#  radiating waves from the origin
-	#z = math.cos(2*r)
+	'''z = math.cos(2*r)'''
 	
 	
 	#  damped radiating waves from the origin

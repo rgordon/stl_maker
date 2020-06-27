@@ -2,7 +2,7 @@
 
 '''
 Created on June 12, 2020
-This is my attempt to write a tool to create stl files based on Z as a function of X and Y
+This is my attempt to write a tool to create stl files of surfaces defined by  Z as a function of X and Y.
 
 
 This  program is built off my program stub.
