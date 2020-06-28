@@ -19,6 +19,8 @@ import os
 import logging
 import math
 from datetime import *
+from pathlib import Path
+
 
 # Import from this package
 import bootstrap
@@ -134,11 +136,13 @@ else:
 	log.critical("output_type in json ["+output_type+"] file not recognized")
 	quit()
 
-if os.path.exists(output_directory): 
-	filepath = os.path.abspath(os.path.join(output_directory,output_filename+".stl"))
-else:
-	log.critical("output_directory ["+output_directory+"] not found.")
-	quit()
+# create the output directory if it doesn't exist:
+out_path = Path(output_directory)
+out_path.mkdir(parents=True, exist_ok=True)
+file_path = out_path / f'{output_filename}.stl'
+# i think it still needs to be a string elsewhere in this code so keep it that way for now.
+filepath = str(file_path.absolute())
+"
 
 
 #########################################################################################################
