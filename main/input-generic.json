@@ -1,0 +1,61 @@
+{
+"Z_as_a_function_of_X_and_Y":{
+    "comment":"Function must be aline of executable python code that has x and y as variables, and returns the desired z value. x,y,and z must be lower case.",
+    "Z_as_a_function_of_X_and_Y":"z=math.sin(x) + math.sin(y)"
+	},
+
+"min_x" : {
+    "comment":"minimum value of x. NO QUOTES ON A NUMBER",
+    "min_x":0.0
+	},
+	
+"max_x" : {
+    "comment":"maximum value of x. NO QUOTES ON A NUMBER",
+    "max_x":10
+	},    
+    
+"num_x_steps" : {
+    "comment":"number of steps to take between min_x and max_x. This is the number of facets in the X-direction. NO QUOTES ON A NUMBER",
+    "num_x_steps":100
+	},     
+
+"min_y" : {
+    "comment":"minimum value of y. NO QUOTES ON A NUMBER",
+    "min_y":0
+	},
+	
+"max_y" : {
+    "comment":"maximum value of y. NO QUOTES ON A NUMBER",
+    "max_y":10
+	},    
+    
+"num_y_steps" : {
+    "comment":"number of steps to take between min_y and max_y. This is the number of facets in the Y-direction. NO QUOTES ON A NUMBER",
+    "num_y_steps":100
+	},   
+
+"output_type":{
+	"comment": "Must be either 'binary' or 'text'. Binary will be a much smaller file size.",
+	"output_type": "text"
+	},
+	
+"output_filename":{
+	"comment": "Name of file. program will append '.stl' to the name",
+	"output_filename": "stl_test_bin"
+	},	
+
+"output_directory":{
+	"comment": "Where to write the file. Must be absolute path and written appropriate to the OS. ",
+	"output_directory": "../outputs"
+	},	
+
+	
+  
+"program_controls":{ "comment":" These input variable are used for debugging and logging. turning debug_v and/or debug_vv to True will provide more verbose output.",
+    "logfile_threshold":"none - NOTSET",
+    "logfile_threshold_comment":"Any value other than those in threshold options will result in no loging to a file" ,
+    "logconsole_threshold": "NOTSET",
+    "threshold options":" CRITICAL, ERROR, WARNING, INFO, DEBUG, NOTSET = 0",
+    "debug_v":"False",
+    "debug_vv":"False"}
+}
