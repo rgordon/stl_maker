@@ -11,7 +11,6 @@ class STLFacet:
 
     def __init__(self, pt1, pt2, pt3):
         # Calculate the normal for this facet
-
         self.p1 = np.array([pt1[0], pt1[1], pt1[2]])
         self.p2 = np.array([pt2[0], pt2[1], pt2[2]])
         self.p3 = np.array([pt3[0], pt3[1], pt3[2]])
@@ -90,7 +89,7 @@ class STLFile:
         if self.file_type == TEXT_ENCODING:
             self.file_obj = open(self.file_path, 'w')
             self.file_obj.write(f'solid {self.solid_name}\n')
-        elif self.file_path == BINARY_ENCODING:
+        elif self.file_type == BINARY_ENCODING:
             self.file_obj = open(self.file_path, 'wb')
 
             # TODO create this  string programmatically
@@ -109,7 +108,7 @@ class STLFile:
     def __exit__(self, exception_type, exception_value, traceback):
         """invoked when 'with' statement goes out of scope, properly terminates file."""
         if self.file_type == 'txt':
-            stl_file.write(f'endsolid {self.solid_name}\n )
+            self.file_obj.write(f'endsolid {self.solid_name}\n' )
 
         if self.file_obj:
             self.file_obj.close()
@@ -117,8 +116,8 @@ class STLFile:
     def append_facet(self, facet: STLFacet):
         """Use this to write a facet to this STL resource"""
         if self.file_type == TEXT_ENCODING:
-            data_list = facet.get_text_encoding
-         elif self.file_type == BINARY_ENCODING:
+            data_list = facet.get_text_encoding()
+        elif self.file_type == BINARY_ENCODING:
             data_list = facet.get_binary_encoding()
         else:
             raise Exception(f'unknown file_type {self.file_type}')
