@@ -6,7 +6,7 @@ from main import STL as stl
 
 class STLTestCase(unittest.TestCase):
 
-    def setUp(self) -> None:
+    def setUp(self):
         # points are tuples (x, y, z)
         self.pt_1 = (0.0, 0.0, 0.0)
         self.pt_2 = (0.0, 10.0, 3.0)
