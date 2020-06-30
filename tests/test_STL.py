@@ -4,6 +4,8 @@ from pathlib import Path
 
 from main import STL as stl
 
+"""To run this within your environment just 'python -m unittest discover -s tests' from project directory"""
+
 class STLTestCase(unittest.TestCase):
 
     def setUp(self):
