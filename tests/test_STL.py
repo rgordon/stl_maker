@@ -2,6 +2,13 @@ import unittest
 from tempfile import NamedTemporaryFile
 from pathlib import Path
 
+"""
+import sys
+import os
+#sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+print(os.path.dirname(__file__))
+print(os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+"""
 from main import STL as stl
 
 """To run this within your environment just 'python -m unittest discover -s tests' from project directory"""
